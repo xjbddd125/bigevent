@@ -1,12 +1,8 @@
 // 获取用户信息,并渲染到页面中
 function renderUser() {
     $.ajax({
-        url: 'http://ajax.frontend.itheima.net/my/userinfo',
-        headers: {
-            Authorization: localStorage.getItem('token')
-        },
+        url: '/my/userinfo',   
         success: function (res) {
-            console.log(res);
             if (res.status === 0) {
                 // 渲染用户名(优先使用nickname)
                 let name = res.data.nickname || res.data.username;
@@ -16,23 +12,14 @@ function renderUser() {
                     //有图片
                     $('.layui-nav-img').attr('src', res.data.user_pic).show();
                 } else {
+                    //无图片
                     let first = name.substr(0,1).toUpperCase();
                     $('.avatar').text(first).css('display', 'inline-block');
                 }
             }
         },
-        complete: function (xhr) {
-            if (xhr.responseJSON.status === 1 && xhr.responseJSON.message === '身份认证失败！') {
-                // 说明用户使用了过期的或者虚假的token
-                // 1.删除假token
-                localStorage.removeItem('token');
-                // 2.跳转到登录页
-                location.href = '/login.html';
-            }
-        },
-
-    })
-};
+    });
+}
 renderUser();
 
 // ---------------退出功能-----------------
