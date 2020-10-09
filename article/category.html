@@ -51,7 +51,7 @@
 
     <!-- 添加类别 -->
     <script type="text/html" id="tpl-add">
-        <form class="layui-form" action="" style="margin:30px; margin-left:-10px">
+        <form class="layui-form add-form" action="" style="margin:30px; margin-left:-10px">
             <div class="layui-form-item">
                 <label class="layui-form-label">类别名称</label>
                 <div class="layui-input-block">
@@ -68,6 +68,30 @@
                 <div class="layui-input-block">
                     <button class="layui-btn" lay-submit lay-filter="formDemo">确认添加</button>
                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </script>
+    
+    <!-- 编辑类别 -->
+    <script type="text/html" id="tpl-edit">
+        <form lay-filter="edit" class="layui-form edit-form" action="" style="margin:30px; margin-left:-10px">
+            <div class="layui-form-item">
+                <label class="layui-form-label">类别名称</label>
+                <div class="layui-input-block">
+                    <input type="text" name="name" required  lay-verify="required" placeholder="请输入类别名称" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">类别别名</label>
+                <div class="layui-input-block">
+                    <input type="text" name="alias" required  lay-verify="required" placeholder="请输入类别别名" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <input type="text" disabled name="Id">
+                    <button class="layui-btn" lay-submit lay-filter="formDemo">确认修改</button>
                 </div>
             </div>
         </form>

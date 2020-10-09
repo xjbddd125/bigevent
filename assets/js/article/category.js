@@ -26,16 +26,16 @@ $('body').on('click', 'button:contains("删除")', function () {
 })
 
 
-//弹层效果
+//添加的弹层效果
 let addIndex;
 $('button:contains("添加类别")').on('click', function () {
-    addIndex=layer.open({
+    addIndex = layer.open({
         type: 1,
-        title: '调试',
+        title: '添加类别',
         content: $('#tpl-add').html(),
         area: ['500px', '250px']
-    })
-});
+    });
+})
 
 //确认添加
 $('body').on('submit', '.add-form', function (e) {
@@ -46,10 +46,53 @@ $('body').on('submit', '.add-form', function (e) {
         data: $(this).serialize,
         success: function (res) {
             layer.msg(res.message);
-            if(res.status===0){
+            if (res.status === 0) {
                 renderCategory();
                 layer.close(addIndex);
             }
         }
-    })
+    });
 });
+
+//编辑的弹层效果
+let editIndex;
+$('body').on('click', 'button:contains("编辑")', function () {
+    let data = $(this).data();
+    data.Id = data.id;
+
+    editIndex = layer.open({
+        type: 1,
+        title: '编辑类别',
+        content: $('#tpl-edit').html(),
+        area: ['500px', '250px'],
+        //数据回填,需要在弹层之后再回填
+        success: function () {
+            // $('input[name=name]').val(data.name);
+            // $('input[name=alias]').val(data.alias);
+            // $('input[name=Id]').val(data.id);
+
+            let form = layui.form;
+            form.val('edit', data);
+        }
+    })
+})
+
+
+
+//确认修改
+$('body').on('submit', '.edit-form', function (e) {
+    e.preventDefault();
+    let data = $(this).serialize();
+    $.ajax({
+        type: 'POST',
+        data: data,
+        url: '/my/article/updatecate',
+        success: function (res) {
+            layer.msg(res.message);
+            if (res.status === 0) {
+                renderCategory();
+                layer.close(editIndex);
+            }
+        }
+    });
+})
