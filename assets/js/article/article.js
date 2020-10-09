@@ -46,4 +46,14 @@ function showPage(t) {
         }
     });
 }
-// showPage();
+//发送请求获取分类
+$.ajax({
+    url: '/my/article/cates',
+    success: function (res) {
+        // console.log(res)
+        var html = template('tpl-category', res)
+        $('select[name=category]').html(html);
+        // 调用layui的更新渲染方法
+        form.render('select');
+    }
+});
