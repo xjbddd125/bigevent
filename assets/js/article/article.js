@@ -50,7 +50,6 @@ function showPage(t) {
 $.ajax({
     url: '/my/article/cates',
     success: function (res) {
-        // console.log(res)
         var html = template('tpl-category', res)
         $('select[name=category]').html(html);
         // 调用layui的更新渲染方法
