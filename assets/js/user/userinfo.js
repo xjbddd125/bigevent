@@ -36,7 +36,7 @@ $('form').on('submit', function (e) {
     });
 })
 
-$('button[type=reset]').on('click',function(e){
+$('button[type=reset]').on('click', function (e) {
     e.preventDefault();
     renderForm();
 })
